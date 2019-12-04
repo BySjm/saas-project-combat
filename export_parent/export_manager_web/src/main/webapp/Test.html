@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="plugins/ztree/css/zTreeStyle/zTreeStyle.css">
+    <script src="plugins/ztree/js/jquery-1.4.4.min.js"></script>
+    <script src="plugins/ztree/js/jquery.ztree.all-3.5.js"></script>
+    <script>
+        var zTreeObj;
+        var setting = {
+            data: {
+                simpleData: {
+                    enable: true,
+                    idKey: "id",
+                    pIdKey: "pId",
+                    rootPId: 0
+                }
+            },
+            check: {
+                enable: true
+            }
+        };
+        var zNodes = [
+            {id:1, pId:0, name: "父节点1"},
+            {id:11, pId:1, name: "子节点1"},
+            {id:12, pId:1, name: "子节点2"},
+            {id:2, pId:0, name: "父节点2"},
+            {id:21, pId:2, name: "子节点21"},
+            {id:22, pId:2, name: "子节点22"}
+        ];
+        $(document).ready(function(){
+            zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+            zTreeObj.expandAll(true);//展开全部节点
+            var data = "1,11,2,21";
+            var datas = data.split(',');
+            for(var i = 0;i<datas.length;i++) {
+                var node = zTreeObj.getNodeByParam("id", datas[i]);
+                if(node != null) {
+                    zTreeObj.checkNode(node, true)
+                }
+            }
+        });
+        function save() {
+            var nodes = zTreeObj.getCheckedNodes(true);
+            var str = "";
+            for (var i = 0; i < nodes.length; i++) {
+                if (i === nodes.length - 1) {
+                    str += nodes[i].id;
+                }else {
+                    str += nodes[i].id + ",";
+                }
+            }
+            console.log(str);
+        }
+    </script>
+</head>
+<body>
+<ul id="treeDemo" class="ztree"></ul>
+<button onclick="save()">保存</button>
+</body>
+</html>
