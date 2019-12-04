@@ -94,6 +94,5 @@ public class UserServiceImpl implements UserService {
     public static void main(String[] args) {
         String password = new Md5Hash("123456", "laowang@export.com", 2).toString();
         System.out.println(password);
-        System.out.println("1111");
     }
 }
