@@ -78,4 +78,10 @@ public class PackingController extends BaseController {
         packingService.cancel(id);
         return "redirect:/cargo/packing/list.do";
     }
+
+    @RequestMapping(value = "/delete",name = "删除装箱单")
+    public String delete(String id) {
+        packingService.delete(id);
+        return "redirect:/cargo/packing/list.do";
+    }
 }

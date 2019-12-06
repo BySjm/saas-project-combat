@@ -15,4 +15,6 @@ public interface PackingDao {
     Packing findById(String packingListId);
 
     List<Packing> findByState(@Param("state") Integer state, @Param("companyId") String companyId);
+
+    void delete(String packingListId);
 }

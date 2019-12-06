@@ -1,7 +1,9 @@
 package cn.bysjm.service.cargo.impl;
 
 import cn.bysjm.dao.cargo.ExportDao;
+import cn.bysjm.dao.cargo.InvoiceDao;
 import cn.bysjm.dao.cargo.PackingDao;
+import cn.bysjm.dao.cargo.ShippingDao;
 import cn.bysjm.domain.cargo.Export;
 import cn.bysjm.domain.cargo.Packing;
 import cn.bysjm.service.cargo.PackingService;
@@ -21,7 +23,13 @@ public class PackingServiceImpl implements PackingService {
     private PackingDao packingDao;
 
     @Autowired
-    private ExportDao exportDao;
+    private ExportDao exportDao;//报运单
+
+    @Autowired
+    private ShippingDao shippingDao;//委托
+
+    @Autowired
+    private InvoiceDao invoiceDao;//发票
 
     @Override
     public PageInfo findAll(Integer page, Integer pageSize, String companyId) {
@@ -33,6 +41,11 @@ public class PackingServiceImpl implements PackingService {
     @Override
     public void save(Packing packing) {
         packingDao.save(packing);
+        //2.修改报运单的状态码
+        Export export = new Export();
+        export.setState(3);//已报运->已装箱
+        export.setId(packingDao.findById(packing.getPackingListId()).getExportId());
+        exportDao.updateByPrimaryKeySelective(export);
     }
 
     @Override
@@ -52,11 +65,6 @@ public class PackingServiceImpl implements PackingService {
         packing.setState(1);//草稿->已装箱
         packing.setPackingListId(id);
         packingDao.update(packing);
-        //2.修改报运单的状态码
-        Export export = new Export();
-        export.setState(3);//已报运->已装箱
-        export.setId(packingDao.findById(id).getExportId());
-        exportDao.updateByPrimaryKeySelective(export);
     }
 
     @Override
@@ -66,11 +74,6 @@ public class PackingServiceImpl implements PackingService {
         packing.setState(0);//已上报->草稿
         packing.setPackingListId(id);
         packingDao.update(packing);
-        //2.修改报运单的状态码
-        Export export = new Export();
-        export.setState(2);//已装箱->已报运
-        export.setId(packingDao.findById(id).getExportId());
-        exportDao.updateByPrimaryKeySelective(export);
     }
 
     @Override
@@ -78,5 +81,15 @@ public class PackingServiceImpl implements PackingService {
         PageHelper.startPage(page,pageSize);
         List<Packing> packingList = packingDao.findByState(state, companyId);
         return new PageInfo<>(packingList,5);
+    }
+
+    @Override
+    public void delete(String id) {
+        //1.删除发票
+        invoiceDao.deleteByPrimaryKey(id);
+        //2.删除委托单
+        shippingDao.deleteByPrimaryKey(id);
+        //3.删除装箱单
+        packingDao.delete(id);
     }
 }

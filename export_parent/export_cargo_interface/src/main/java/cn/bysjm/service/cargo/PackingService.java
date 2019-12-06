@@ -22,4 +22,6 @@ public interface PackingService {
     void cancel(String id);
 
     PageInfo findByState(Integer page, Integer pageSize, Integer state, String companyId);
+
+    void delete(String id);
 }

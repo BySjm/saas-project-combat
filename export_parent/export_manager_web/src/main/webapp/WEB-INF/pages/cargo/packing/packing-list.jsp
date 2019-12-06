@@ -135,7 +135,7 @@
                             <td><fmt:formatDate value="${o.invoiceDate}" pattern="yyyy-MM-dd"/></td>
                             <td>${o.marks}</td>
                             <td><c:if test="${o.state==0}">草稿</c:if>
-                                <c:if test="${o.state==1}"><font color="green">已上报</font></c:if>
+                                <c:if test="${o.state==1}"><font color="#bdb76b">已上报</font></c:if>
                             </td>
                             <td>
                                 <%--<a href="${ctx }/cargo/contract/toView.do?id=${o.id}">[查看详情]</a>--%>
