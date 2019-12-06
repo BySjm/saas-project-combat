@@ -5,6 +5,8 @@ import cn.bysjm.domain.cargo.Export;
 import cn.bysjm.domain.cargo.ExportExample;
 import com.github.pagehelper.PageInfo;
 
+import java.util.List;
+
 
 public interface ExportService {
 
@@ -19,4 +21,6 @@ public interface ExportService {
 	PageInfo findAll(ExportExample example, int page, int size);
 
     void updateE(ExportResult exportResult);
+
+    PageInfo findByState(Integer page,Integer size,Integer state,String companyId);
 }

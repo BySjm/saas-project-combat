@@ -33,5 +33,5 @@ public interface FactoryService {
 	Factory findById(String id);
 
 	//查询所有
-	public List<Factory> findAll(FactoryExample example);
+	List<Factory> findAll(FactoryExample example);
 }

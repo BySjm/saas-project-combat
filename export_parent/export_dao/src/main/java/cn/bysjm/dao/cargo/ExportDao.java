@@ -2,6 +2,7 @@ package cn.bysjm.dao.cargo;
 
 import cn.bysjm.domain.cargo.Export;
 import cn.bysjm.domain.cargo.ExportExample;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -31,4 +32,6 @@ public interface ExportDao {
      * 更新
      */
     int updateByPrimaryKeySelective(Export record);
+
+    List<Export> findByState(@Param("state") Integer state, @Param("companyId") String companyId);
 }
