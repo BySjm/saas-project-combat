@@ -16,4 +16,8 @@ public interface PackingService {
     void update(Packing packing);
 
     Packing findById(String packingListId);
+
+    void submit(String id);
+
+    void cancel(String id);
 }
