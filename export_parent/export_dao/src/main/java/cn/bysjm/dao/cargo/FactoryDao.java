@@ -21,4 +21,6 @@ public interface FactoryDao {
 
 	//更新
     int updateByPrimaryKeySelective(Factory record);
+    //查询所有
+   /* List<Factory> findAll(FactoryExample example);*/
 }
