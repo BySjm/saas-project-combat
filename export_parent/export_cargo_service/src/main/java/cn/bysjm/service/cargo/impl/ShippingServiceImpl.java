@@ -42,13 +42,17 @@ public class ShippingServiceImpl implements ShippingService {
         String packingListId = shipping.getShippingOrderId();
         Packing packing = packingDao.findById(packingListId);
 
-        // 修改装箱单的状态 为 2 委托
+        // 修改装箱单的状态 1 -> 2:委托
         packing.setState(2);
         packingDao.update(packing);
 
         // 查询报运单
         String exportId = packing.getExportId();
         Export export = exportDao.selectByPrimaryKey(exportId);
+
+        // 修改报运单的状态 3 -> 4:委托
+        export.setState(4);
+        exportDao.updateByPrimaryKeySelective(export);
 
         // 从报运单中拷贝需要的数据到委托单
         shipping.setOrderType(export.getTransportMode()); // 运输方式

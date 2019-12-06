@@ -91,14 +91,13 @@ public class ShippingController extends BaseController {
         return "redirect:/cargo/shipping/list.do";
     }
 
-    // 修改委托单状态为 1
     @RequestMapping(value = "/submit", name = "提交委托单")
     public String submit(String id) {
-        // 创建对象 // 根据主键修改状态
+        // 创建对象 根据主键修改状态
         Shipping shipping = new Shipping();
         // 设置属性 主键 和 状态
         shipping.setShippingOrderId(id);
-        shipping.setState(1);
+        shipping.setState(1); // 提交 更新状态 0 -> 1已上报
         shippingService.update(shipping);
         // 重定向 到查询列表
         return "redirect:/cargo/shipping/list.do";
@@ -109,9 +108,20 @@ public class ShippingController extends BaseController {
         // 查询对应的委托单对象 设置到request域中
         Shipping shipping = shippingService.findById(id);
         request.setAttribute("shipping", shipping);
-
         // 转发逻辑视图
         return "/cargo/shipping/shipping-view";
+    }
+
+    @RequestMapping(value = "/cancel", name = "取消委托单")
+    public String cancel(String id) {
+        // 设置委托单状态为草稿
+        Shipping shipping = new Shipping();
+        shipping.setShippingOrderId(id);
+        shipping.setState(0); // 设置状态 1 -> 0:草稿
+        shippingService.update(shipping);
+
+        // 重定向 到查询列表
+        return "redirect:/cargo/shipping/list.do";
     }
 
 }
