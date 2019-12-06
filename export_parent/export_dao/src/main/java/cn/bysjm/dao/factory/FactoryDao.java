@@ -1,4 +1,4 @@
-package cn.bysjm.dao.cargo;
+package cn.bysjm.dao.factory;
 
 import cn.bysjm.domain.cargo.Factory;
 import cn.bysjm.domain.cargo.FactoryExample;

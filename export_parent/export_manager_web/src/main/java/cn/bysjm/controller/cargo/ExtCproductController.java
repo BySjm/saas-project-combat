@@ -4,7 +4,7 @@ import cn.bysjm.controller.BaseController;
 import cn.bysjm.domain.cargo.*;
 import cn.bysjm.service.cargo.ContractProductService;
 import cn.bysjm.service.cargo.ExtCproductService;
-import cn.bysjm.service.cargo.FactoryService;
+import cn.itcast.service.factory.FactoryService;
 import cn.bysjm.utils.FileUploadUtil;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.pagehelper.PageInfo;
