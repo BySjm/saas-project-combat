@@ -31,21 +31,21 @@ public class PackingController extends BaseController {
         return "cargo/packing/packing-list";
     }
 
-    @RequestMapping(value = "toAdd",name = "进入新增装箱单页面")
+    @RequestMapping(value = "/toAdd",name = "进入新增装箱单页面")
     public String toAdd(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size) {
         PageInfo pageInfo = exportService.findByState(page, size, 2, getCompanyId());
         request.setAttribute("page",pageInfo);
         return "cargo/packing/packing-add";
     }
 
-    @RequestMapping(value = "toUpdate",name = "新增/更新装箱单")
+    @RequestMapping(value = "/toUpdate",name = "新增/更新装箱单")
     public String edit(String packingListId) {
         Packing packing = packingService.findById(packingListId);
         request.setAttribute("packing",packing);
         return "cargo/packing/packing-update";
     }
 
-    @RequestMapping(value = "edit",name = "新增/更新装箱单")
+    @RequestMapping(value = "/edit",name = "新增/更新装箱单")
     public String edit(Packing packing,String exportId) {
         if (StringUtils.isEmpty(packing.getPackingListId())) {
             Export export = exportService.findById(exportId);
@@ -66,4 +66,16 @@ public class PackingController extends BaseController {
         return "redirect:/cargo/packing/list.do";
     }
 
+    @RequestMapping(value = "/submit",name = "提交装箱单")
+    public String submit(String id) {
+        //修改装箱单的ID
+        packingService.submit(id);
+        return "redirect:/cargo/packing/list.do";
+    }
+
+    @RequestMapping(value = "/cancel",name = "取消装箱单")
+    public String cancel(String id) {
+        packingService.cancel(id);
+        return "redirect:/cargo/packing/list.do";
+    }
 }

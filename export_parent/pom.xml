@@ -23,7 +23,6 @@
         <module>export_stat_service</module>
         <module>export_email_consumer</module>
         <module>spring_email_demo</module>
-        <module>export_birth_quartz</module>
     </modules>
 
     <!-- 集中定义依赖版本号 -->
