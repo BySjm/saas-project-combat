@@ -37,4 +37,11 @@ public class PackingServiceImpl implements PackingService {
     public Packing findById(String packingListId) {
         return packingDao.findById(packingListId);
     }
+
+    @Override
+    public PageInfo findByState(Integer page, Integer pageSize, Integer state, String companyId) {
+        PageHelper.startPage(page,pageSize);
+        List<Packing> packingList = packingDao.findByState(state, companyId);
+        return new PageInfo<>(packingList,5);
+    }
 }

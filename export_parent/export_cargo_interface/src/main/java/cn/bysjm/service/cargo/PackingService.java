@@ -20,4 +20,6 @@ public interface PackingService {
     void submit(String id);
 
     void cancel(String id);
+
+    PageInfo findByState(Integer page, Integer pageSize, Integer state, String companyId);
 }

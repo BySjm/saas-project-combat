@@ -91,7 +91,7 @@
 
                         <div class="col-md-2 title">分批装运:</div>
                         <div class="col-md-4 data">
-                            <select name="isBatch">
+                            <select class="form-control" name="isBatch">
                                 <option value="">请选择</option>
                                 <option ${o.isBatch == "0" ?'selected':''} value="0">否</option>
                                 <option ${o.isBatch == "1" ?'selected':''} value="1">是</option>
@@ -100,7 +100,7 @@
 
                         <div class="col-md-2 title">是否交易:</div>
                         <div class="col-md-4 data">
-                            <select name="isBatch">
+                            <select class="form-control" name="isBatch">
                                 <option value="">请选择</option>
                                 <option ${o.isTrans == "0" ?'selected':''} value="0">否</option>
                                 <option ${o.isTrans == "1" ?'selected':''} value="1">是</option>
