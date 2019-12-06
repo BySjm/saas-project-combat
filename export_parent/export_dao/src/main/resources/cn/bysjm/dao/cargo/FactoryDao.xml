@@ -22,6 +22,10 @@
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
     </resultMap>
 
+   <!-- <select id="findAll" parameterType="string" resultMap="BaseResultMap">
+        select * from co_factory where state=#{state}
+    </select>-->
+
     <sql id="Base_Column_List">
         id, ctype, full_name, factory_name, contacts, phone, mobile, fax, address,
         inspector, remark, order_no, state, create_by, create_dept, create_time, update_by,
