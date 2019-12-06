@@ -56,6 +56,14 @@
             alert("请勾选待处理的记录，且每次只能勾选一个")
         }
     }
+    function showRoute() {
+        var id = getCheckId()
+        if(id) {
+            location.href="${ctx}/map/route/showMap.do?id="+id;
+        }else{
+            alert("请勾选待处理的记录，且每次只能勾选一个")
+        }
+    }
 
 
 </script>
@@ -95,6 +103,7 @@
                             <button type="button" class="btn btn-default" title="删除" onclick='deleteById()'><i class="fa fa-trash-o"></i> 删除</button>
                             <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
                             <button type="button" class="btn btn-default" title="提交" onclick="submit()"><i class="fa fa-retweet"></i> 提交</button>
+                            <button type="button" class="btn btn-default" title="路线" onclick="showRoute()"><i class="fa fa-remove"></i> 路线</button>
                             <button type="button" class="btn btn-default" title="取消" onclick="cancel()"><i class="fa fa-remove"></i> 取消</button>
                         </div>
                     </div>

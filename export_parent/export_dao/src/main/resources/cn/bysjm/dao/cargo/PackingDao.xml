@@ -94,4 +94,8 @@
         select * from co_packing_list where packing_list_id = #{packingListId}
     </select>
 
+    <select id="findByState" parameterType="map" resultMap="BaseResultMap">
+        select * from co_packing_list where company_id = #{companyId} and state = #{state}
+    </select>
+
 </mapper>

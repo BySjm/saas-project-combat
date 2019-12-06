@@ -41,7 +41,6 @@
                 <div class="panel-heading">编辑委托单</div>
                 <form id="editForm" action="${ctx}/cargo/shipping/edit.do" method="post" >
                     <input type="hidden" name="shippingOrderId" value="${shipping.shippingOrderId}">
-                    <input id="checkedId" type="hidden" name="packingListId" value="">
                     <div class="row data-type" style="margin: 0px">
 
                         <div class="col-md-2 title">托运方:</div>
@@ -137,72 +136,13 @@
 
             <!--工具栏-->
             <div class="box-tools text-center">
-                <button type="button" onclick='submitFun()' class="btn bg-maroon">保存</button>
+                <button type="button" onclick='document.getElementById("editForm").submit()' class="btn bg-maroon">保存</button>
                 <button type="button" class="btn bg-default" onclick="history.back(-1);">返回</button>
             </div>
             <!--工具栏/-->
 
         </section>
         <!-- 正文区域 /-->
-
-        <section class="content">
-
-            <!-- .box-body -->
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title">报运单列表</h3>
-                </div>
-
-                <div class="box-body">
-
-                    <!-- 数据表格 ** 报运单 状态为2 已报运 ** -->
-                    <div class="table-box">
-                        <!--数据列表-->
-                        <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
-                            <thead>
-                            <tr>
-                                <th class="" style="padding-right:0px;">
-
-                                </th>
-                                <th class="sorting">装箱单号</th>
-                                <th class="sorting">卖方</th>
-                                <th class="sorting">买方</th>
-                                <th class="sorting">发票号</th>
-                                <th class="sorting">发票日期</th>
-                                <th class="sorting">唛头</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach items="${page.list}" var="o" varStatus="status">
-                                <tr>
-                                    <td><input type="checkbox" onclick="clickCheck()" name="packingListId" value="${o.packingListId}"/></td>
-                                    <td>${o.packingListId}</td>
-                                    <td>${o.seller}</td>
-                                    <td>${o.buyer}</td>
-                                    <td>${o.invoiceNo}</td>
-                                    <td><fmt:formatDate value="${o.invoiceDate}" pattern="yyyy-MM-dd"/></td>
-                                    <td>${o.marks}</td>
-                                </tr>
-                            </c:forEach>
-                            </tbody>
-                        </table>
-                        <!--数据列表/-->
-                        <!--工具栏/-->
-                    </div>
-                    <!-- 数据表格 /-->
-                </div>
-                <!-- /.box-body -->
-
-                <!-- .box-footer-->
-                <div class="box-footer">
-                    <jsp:include page="../../common/page.jsp">
-                        <jsp:param value="/cargo/shipping/toAdd.do" name="pageUrl"/>
-                    </jsp:include>
-                </div>
-                <!-- /.box-footer-->
-            </div>
-        </form>
-    </section>
 
 </div>
 <!-- 内容区域 /-->
@@ -222,32 +162,5 @@
         format: 'yyyy-mm-dd'
     });
 </script>
-
-<!-- 获取选中的装箱单id, 存放到表单的隐藏域中 -->
-<script>
-    function clickCheck() {
-
-        let size = $("input:checkbox:checked").length;
-        if (1 !== size) {
-            alert("请勾选待处理的记录，且每次只能勾选一个");
-            $("input:checkbox:checked").prop("checked", false)
-        } else {
-            $('#checkedId').val($('input[type=checkbox]:checked').val());
-        }
-    }
-</script>
-
-<!-- 提交表单 -->
-<script>
-    function submitFun() {
-        let checkedIdValue = $('#checkedId').val();
-        if (checkedIdValue == null || '' === checkedIdValue) {
-            alert("装箱单不能为空!");
-        } else {
-            $('#editForm').submit();
-        }
-    }
-</script>
-
 
 </html>

@@ -16,4 +16,6 @@ public interface PackingService {
     void update(Packing packing);
 
     Packing findById(String packingListId);
+
+    PageInfo findByState(Integer page, Integer pageSize, Integer state, String companyId);
 }
