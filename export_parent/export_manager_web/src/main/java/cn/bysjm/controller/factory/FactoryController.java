@@ -1,9 +1,9 @@
-package cn.bysjm.controller.cargo;
+package cn.bysjm.controller.factory;
 
 import cn.bysjm.controller.BaseController;
 import cn.bysjm.domain.cargo.Factory;
 import cn.bysjm.domain.cargo.FactoryExample;
-import cn.bysjm.service.cargo.FactoryService;
+import cn.itcast.service.factory.FactoryService;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang.StringUtils;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 @Controller
