@@ -6,13 +6,13 @@ import java.util.Date;
 public class Invoice implements Serializable {
     private String invoiceId;
 
-    private String scNo;
+    private String scNo;//合同号
 
-    private String blNo;
+    private String blNo;//提单号
 
-    private String tradeTerms;
+    private String tradeTerms;//贸易条款
 
-    private Integer state;
+    private Integer state;//0-草稿 1-已上报
 
     private String createBy;
 

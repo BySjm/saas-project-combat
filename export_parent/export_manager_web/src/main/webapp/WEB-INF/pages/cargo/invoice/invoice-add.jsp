@@ -39,8 +39,8 @@
         <!--委托单信息-->
         <div class="panel panel-default">
             <div class="panel-heading">编辑发票单</div>
-            <form id="editForm" action="${ctx}/cargo/shipping/edit.do" method="post" >
-                <input type="hidden" name="invoiceId" value="${invoice.invoiceId}">
+            <form id="editForm" action="${ctx}/cargo/invoice/edit.do" method="post" >
+                <input type="text" name="invoiceId" value="${invoice.invoiceId}">
                 <input id="checkedId" type="hidden" name="packingListId" value="">
                 <div class="row data-type" style="margin: 0px">
                     <div class="col-md-2 title">提单号:</div>

@@ -91,5 +91,10 @@ public class PackingServiceImpl implements PackingService {
         shippingDao.deleteByPrimaryKey(id);
         //3.删除装箱单
         packingDao.delete(id);
+        //4.修改报运单的状态码
+        Export export = new Export();
+        export.setState(2);//已报运->已装箱
+        export.setId(packingDao.findById(id).getExportId());
+        exportDao.updateByPrimaryKeySelective(export);
     }
 }

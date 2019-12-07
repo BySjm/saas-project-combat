@@ -49,7 +49,7 @@
     }
 
     function view() {
-        var id = getCheckId()
+        var id = getCheckId();
         if(id) {
             location.href="${ctx}/cargo/invoice/toView.do?invoiceId="+id;
         }else{

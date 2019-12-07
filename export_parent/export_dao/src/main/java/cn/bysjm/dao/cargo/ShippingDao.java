@@ -28,4 +28,5 @@ public interface ShippingDao {
     int updateByPrimaryKeySelective(Shipping record);
 
     int updateByPrimaryKey(Shipping record);
+
 }

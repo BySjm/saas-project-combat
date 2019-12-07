@@ -85,4 +85,10 @@ public class PackingController extends BaseController {
         packingService.delete(id);
         return "redirect:/cargo/packing/list.do";
     }
+    @RequestMapping(value = "/toView",name = "查看装箱单")
+    public String toView(String id) {
+        Packing packing = packingService.findById(id);
+        request.setAttribute("packing",packing);
+        return "cargo/packing/packing-view";
+    }
 }

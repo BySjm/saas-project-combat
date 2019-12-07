@@ -28,11 +28,11 @@ public interface InvoiceService {
     /**
      * 根据id查询
      */
-    Factory findById(String id);
+    Invoice findById(String id);
 
     //分页查询
     PageInfo findPage(InvoiceExample example, int page, int size);
     //查询所有
-    public List<Factory> findAll(InvoiceExample example);
+    List<Invoice> findAll(InvoiceExample example);
 
 }
