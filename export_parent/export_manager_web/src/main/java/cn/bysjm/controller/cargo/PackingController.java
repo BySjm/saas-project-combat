@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+//装箱
 @Controller
 @RequestMapping("/cargo/packing")
 public class PackingController extends BaseController {
