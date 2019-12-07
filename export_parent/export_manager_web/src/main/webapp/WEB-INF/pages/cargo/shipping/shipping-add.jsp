@@ -41,7 +41,7 @@
                 <div class="panel-heading">编辑委托单</div>
                 <form id="editForm" action="${ctx}/cargo/shipping/edit.do" method="post" >
                     <input type="hidden" name="shippingOrderId" value="${shipping.shippingOrderId}">
-                    <input id="checkedId" type="hidden" name="packingListId" value="">
+                    <input id="checkedId" type="hidden" name="packingListId">
                     <div class="row data-type" style="margin: 0px">
 
                         <div class="col-md-2 title">托运方:</div>
@@ -69,7 +69,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
-                                <input type="text" placeholder="装货日期"  name="invoiceDate" class="form-control pull-right"
+                                <input type="text" placeholder="装货日期"  name="loadingDate" class="form-control pull-right"
                                        value="<fmt:formatDate value="${shipping.loadingDate}" pattern="yyyy-MM-dd"/>" id="loadingDate">
                             </div>
                         </div>
@@ -96,7 +96,7 @@
 
                         <div class="col-md-2 title">是否交易:</div>
                         <div class="col-md-4 data">
-                            <select class="form-control" name="isBatch">
+                            <select class="form-control" name="isTrans">
                                 <option value="">请选择</option>
                                 <option ${o.isTrans == "0" ?'selected':''} value="0">否</option>
                                 <option ${o.isTrans == "1" ?'selected':''} value="1">是</option>
@@ -113,17 +113,20 @@
                             <input type="text" class="form-control" placeholder="特殊条款" name="specialCondition" value="${shipping.specialCondition}">
                         </div>
 
+                        <div class="col-md-2 title">转运港:</div>
+                        <div class="col-md-4 data">
+                            <input type="text" class="form-control" placeholder="转运港" name="portOfTrans" value="${shipping.portOfTrans}">
+                        </div>
+
                         <div class="col-md-2 title">运费:</div>
                         <div class="col-md-4 data">
-                            <input type="text" class="form-control" placeholder="运费" name="marks" value="${shipping.freight}">
+                            <input type="text" class="form-control" placeholder="运费" name="freight" value="${shipping.freight}">
                         </div>
 
                         <div class="col-md-2 title">校验人:</div>
                         <div class="col-md-4 data">
-                            <input type="text" class="form-control" placeholder="校验人" name="marks" value="${shipping.checkBy}">
+                            <input type="text" class="form-control" placeholder="校验人" name="checkBy" value="${shipping.checkBy}">
                         </div>
-                        <div class="col-md-2"></div>
-                        <div class="col-md-4 data"></div>
 
                         <div class="col-md-2 title rowHeight2x">备注</div>
                         <div class="col-md-10 data rowHeight2x">

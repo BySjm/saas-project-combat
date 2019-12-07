@@ -37,12 +37,12 @@ public class ShippingServiceImpl implements ShippingService {
         // 先根据装箱单id查询 装箱单 (委托单的id等于 装箱单的id)
         // 根据装箱单的exportId报运单id查询报运单的数据
         // 将报运单中的数据设置到委托单中
-        // 最后将装箱单的状态设置为 3 委托
+        // 最后将装箱单的状态设置为 2 委托
         // 查询装箱单
         String packingListId = shipping.getShippingOrderId();
         Packing packing = packingDao.findById(packingListId);
 
-        // 修改装箱单的状态 1 -> 2:委托
+        // 修改装箱单的状态 1 - 2委托
         packing.setState(2);
         packingDao.update(packing);
 
@@ -50,7 +50,7 @@ public class ShippingServiceImpl implements ShippingService {
         String exportId = packing.getExportId();
         Export export = exportDao.selectByPrimaryKey(exportId);
 
-        // 修改报运单的状态 3 -> 4:委托
+        // 修改报运单的状态 3 - 4委托
         export.setState(4);
         exportDao.updateByPrimaryKeySelective(export);
 

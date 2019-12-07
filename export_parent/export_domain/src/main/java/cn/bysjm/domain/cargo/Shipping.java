@@ -1,5 +1,7 @@
 package cn.bysjm.domain.cargo;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -22,8 +24,10 @@ public class Shipping implements Serializable {
 
     private String portOfDischarge;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date loadingDate;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date limitDate;
 
     private String isBatch;

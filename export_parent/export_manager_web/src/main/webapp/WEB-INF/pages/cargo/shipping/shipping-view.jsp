@@ -41,7 +41,6 @@
                 <div class="panel-heading">查看委托单</div>
                 <form id="editForm" action="${ctx}/cargo/shipping/edit.do" method="post" >
                     <input type="hidden" name="shippingOrderId" value="${shipping.shippingOrderId}">
-                    <input id="checkedId" type="hidden" name="packingListId" value="">
                     <div class="row data-type" style="margin: 0px">
                         <div class="col-md-2 title">货运类型:</div>
                         <div class="col-md-4 data">
@@ -65,7 +64,25 @@
                             <input type="text" class="form-control" placeholder="通知人" name="notifyParty" value="${shipping.notifyParty}" >
                         </div>
 
-                        <!-- 信用证号 装货港 转运港 卸货港 -->
+                        <div class="col-md-2 title">信用证号:</div>
+                        <div class="col-md-4 data">
+                            <input type="text" class="form-control" placeholder="信用证号" name="lcNo" value="${shipping.lcNo}">
+                        </div>
+
+                        <div class="col-md-2 title">装货港:</div>
+                        <div class="col-md-4 data">
+                            <input type="text" class="form-control" placeholder="装货港" name="portOfLoading" value="${shipping.portOfLoading}">
+                        </div>
+
+                        <div class="col-md-2 title">转运港:</div>
+                        <div class="col-md-4 data">
+                            <input type="text" class="form-control" placeholder="转运港" name="portOfTrans" value="${shipping.portOfTrans}">
+                        </div>
+
+                        <div class="col-md-2 title">目的港:</div>
+                        <div class="col-md-4 data">
+                            <input type="text" class="form-control" placeholder="目的港" name="portOfDischarge" value="${shipping.portOfDischarge}">
+                        </div>
 
                         <div class="col-md-2 title">装货日期:</div>
                         <div class="col-md-4 data">
@@ -73,7 +90,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
-                                <input type="text" placeholder="装货日期"  name="invoiceDate" class="form-control pull-right"
+                                <input type="text" placeholder="装货日期"  name="loadingDate" class="form-control pull-right"
                                        value="<fmt:formatDate value="${shipping.loadingDate}" pattern="yyyy-MM-dd"/>" id="loadingDate">
                             </div>
                         </div>
@@ -100,7 +117,7 @@
 
                         <div class="col-md-2 title">是否交易:</div>
                         <div class="col-md-4 data">
-                            <select class="form-control" name="isBatch">
+                            <select class="form-control" name="isTrans">
                                 <option value="">请选择</option>
                                 <option ${o.isTrans == "0" ?'selected':''} value="0">否</option>
                                 <option ${o.isTrans == "1" ?'selected':''} value="1">是</option>
@@ -119,20 +136,23 @@
 
                         <div class="col-md-2 title">运费:</div>
                         <div class="col-md-4 data">
-                            <input type="text" class="form-control" placeholder="运费" name="marks" value="${shipping.freight}">
+                            <input type="text" class="form-control" placeholder="运费" name="freight" value="${shipping.freight}">
                         </div>
 
                         <div class="col-md-2 title">校验人:</div>
                         <div class="col-md-4 data">
-                            <input type="text" class="form-control" placeholder="校验人" name="marks" value="${shipping.checkBy}">
+                            <input type="text" class="form-control" placeholder="校验人" name="checkBy" value="${shipping.checkBy}">
                         </div>
 
                         <div class="col-md-2 title">状态:</div>
                         <div class="col-md-4 data">
-                            <input type="text" class="disabled" name="state" value="${o.state == 1 ? "已上报" : "草稿"}" />
+                            <input type="text" class="form-control" name="state" value="${o.state == 1 ? "已上报" : "草稿"}" />
                             <%--<c:if test="${o.state==0}">草稿</c:if>
                             <c:if test="${o.state==1}"><font color="green">已上报</font></c:if>--%>
                         </div>
+
+                        <div class="col-md-2"></div>
+                        <div class="col-md-4 data"></div>
 
                         <div class="col-md-2 title rowHeight2x">备注</div>
                         <div class="col-md-10 data rowHeight2x">
