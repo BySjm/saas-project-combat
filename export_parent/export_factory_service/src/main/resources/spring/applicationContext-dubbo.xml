@@ -14,13 +14,13 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- 当前应用名称，用于注册中心计算应用间依赖关系，注意：消费者和提供者应用名不要一样 -->
-    <dubbo:application name="export_cargo_service" />
+    <dubbo:application name="export_factory_service" />
     <!-- 连接服务注册中心zookeeper ip为zookeeper所在服务器的ip地址-->
     <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
     <!-- 注册  协议 (使用dubbo协议) 和port   端口默认是20880 -->
-    <dubbo:protocol name="dubbo" port="20889"/>
+    <dubbo:protocol name="dubbo" port="20886"/>
     <!-- 扫描指定包，加入@Service注解的类会被发布为服务  -->
-    <dubbo:annotation package="cn.bysjm.service.cargo.impl" />
+    <dubbo:annotation package="cn.itcast.service.factory.impl" />
 
 
     <bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

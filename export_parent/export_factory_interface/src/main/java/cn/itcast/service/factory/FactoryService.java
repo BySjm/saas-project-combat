@@ -1,4 +1,4 @@
-package cn.bysjm.service.cargo;
+package cn.itcast.service.factory;
 
 
 

@@ -1,13 +1,15 @@
-package cn.bysjm.service.cargo.impl;
+package cn.itcast.service.factory.impl;
 
-import cn.bysjm.dao.cargo.FactoryDao;
+
+import cn.bysjm.dao.factory.FactoryDao;
 import cn.bysjm.domain.cargo.Factory;
 import cn.bysjm.domain.cargo.FactoryExample;
-import cn.bysjm.service.cargo.FactoryService;
+import cn.itcast.service.factory.FactoryService;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+
 
 import java.util.List;
 

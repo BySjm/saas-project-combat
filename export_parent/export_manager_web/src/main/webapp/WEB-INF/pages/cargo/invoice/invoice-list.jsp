@@ -128,7 +128,6 @@
                             <td>${o.invoiceId}</td>
                             <td>${o.blNo}</td>
                             <td>${o.tradeTerms}</td>
-                            <td>${o.invoiceNo}</td>
                             <td><c:if test="${o.state==0}">草稿</c:if>
                                 <c:if test="${o.state==1}"><font color="green">已上报</font></c:if>
                             </td>

@@ -16,7 +16,7 @@ public class Packing implements Serializable {
     private String seller;//卖方√
     private String buyer;//买方√
     private String invoiceNo;//发票号√
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date invoiceDate;//发票日期√
     private String marks;//唛头√
     private String descriptions;//√
