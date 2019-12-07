@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+//装箱
 @Controller
 @RequestMapping("/cargo/packing")
 public class PackingController extends BaseController {
@@ -76,6 +77,12 @@ public class PackingController extends BaseController {
     @RequestMapping(value = "/cancel",name = "取消装箱单")
     public String cancel(String id) {
         packingService.cancel(id);
+        return "redirect:/cargo/packing/list.do";
+    }
+
+    @RequestMapping(value = "/delete",name = "删除装箱单")
+    public String delete(String id) {
+        packingService.delete(id);
         return "redirect:/cargo/packing/list.do";
     }
 }

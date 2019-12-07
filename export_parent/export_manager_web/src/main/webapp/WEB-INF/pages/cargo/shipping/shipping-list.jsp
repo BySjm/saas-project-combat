@@ -142,6 +142,7 @@
                     <c:forEach items="${page.list}" var="o" varStatus="status">
                         <tr>
                             <td><input type="checkbox" name="shippingOrderId" value="${o.shippingOrderId}"/></td>
+                            <td>${o.shippingOrderId}</td>
                             <td>${o.orderType}</td>
                             <td>${o.shipper}</td>
                             <td>${o.consignee}</td>
@@ -153,13 +154,13 @@
                             <td>${o.freight}</td>
                             <td>${o.checkBy}</td>
                             <td><c:if test="${o.state==0}">草稿</c:if>
-                                <c:if test="${o.state==1}"><font color="green">已上报</font></c:if>
+                                <c:if test="${o.state==1}"><font color="#bdb76b">已上报</font></c:if>
                             </td>
                             <td>
                                 <%--<a href="${ctx }/cargo/contract/toView.do?id=${o.id}">[查看详情]</a>--%>
                                 <c:if test="${o.state==0}">
-                                    <a href="${ctx }/cargo/shipping/toUpdate.do?id=${o.packingListId}">[编辑]</a>
-                                    <a href="${ctx }/cargo/shipping/list.do?id=${o.packingListId}">[待定内容]</a>
+                                    <a href="${ctx }/cargo/shipping/toUpdate.do?id=${o.shippingOrderId}">[编辑]</a>
+                                    <a href="${ctx }/cargo/shipping/list.do?id=${o.shippingOrderId}">[待定内容]</a>
                                 </c:if>
                             </td>
                         </tr>

@@ -21,7 +21,7 @@ public class Packing implements Serializable {
     private String marks;//唛头√
     private String descriptions;//√
     private String exportId;//报运ID√
-    private Integer state;//'0草稿 1已上报'√
+    private Integer state;//'0草稿 1已上报 2.委托 3.发票
     private String createBy;
     private String createDept;
     @DateTimeFormat(pattern = "yyyy-MM-dd")

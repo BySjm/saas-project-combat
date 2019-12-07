@@ -21,9 +21,9 @@
     </resultMap>
 
     <!--findByProductId-->
-<!--    <select id="findByProductId" parameterType="java.lang.String" resultMap="BaseResultMap">-->
-<!--        select * from co_ext_cproduct where contract_product_id =#{productId}-->
-<!--    </select>-->
+    <select id="findByProductId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select * from co_ext_cproduct where contract_product_id =#{productId}
+    </select>
 
     <sql id="Base_Column_List">
         id, contract_product_id,contract_id, factory_id, factory_name, product_no, product_image,product_request,

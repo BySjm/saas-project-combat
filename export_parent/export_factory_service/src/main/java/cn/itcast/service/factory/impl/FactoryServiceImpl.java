@@ -1,11 +1,15 @@
-package cn.bysjm.service.cargo.impl;
+package cn.itcast.service.factory.impl;
 
-import cn.bysjm.dao.cargo.FactoryDao;
+
+import cn.bysjm.dao.factory.FactoryDao;
 import cn.bysjm.domain.cargo.Factory;
 import cn.bysjm.domain.cargo.FactoryExample;
-import cn.bysjm.service.cargo.FactoryService;
+import cn.itcast.service.factory.FactoryService;
 import com.alibaba.dubbo.config.annotation.Service;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+
 
 import java.util.List;
 
@@ -22,7 +26,7 @@ public class FactoryServiceImpl implements FactoryService {
 
     @Override
     public void update(Factory factory) {
-factoryDao.updateByPrimaryKeySelective(factory);
+    factoryDao.updateByPrimaryKeySelective(factory);
     }
 
     @Override
@@ -36,7 +40,25 @@ factoryDao.deleteByPrimaryKey(id);
     }
 
     @Override
+    public PageInfo findPage(FactoryExample example, int page, int size) {
+        PageHelper.startPage(page,size);
+        List<Factory> list = factoryDao.selectByExample(example);
+        return new PageInfo(list);
+    }
+
+    @Override
     public List<Factory> findAll(FactoryExample example) {
         return factoryDao.selectByExample(example);
     }
+
+//    @Override
+//    public PageInfo<Factory> findPage(FactoryExample example, Integer page, Integer pageSize) {
+//        PageHelper.startPage(page,pageSize);//使用分页插件
+//
+//        List<Factory>list=factoryDao.selectByExample(example);
+//
+//        return new PageInfo<Factory>(list,10);
+//    }
+
+
 }

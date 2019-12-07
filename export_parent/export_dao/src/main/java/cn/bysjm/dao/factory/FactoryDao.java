@@ -1,4 +1,4 @@
-package cn.bysjm.dao.cargo;
+package cn.bysjm.dao.factory;
 
 import cn.bysjm.domain.cargo.Factory;
 import cn.bysjm.domain.cargo.FactoryExample;
@@ -21,4 +21,6 @@ public interface FactoryDao {
 
 	//更新
     int updateByPrimaryKeySelective(Factory record);
+    //查询所有
+   /* List<Factory> findAll(FactoryExample example);*/
 }
