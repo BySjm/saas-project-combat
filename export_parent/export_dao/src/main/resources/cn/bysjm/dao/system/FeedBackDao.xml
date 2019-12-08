@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bysjm.dao.system.FeedBackDao">
+
+    <resultMap id="BaseResultMap" type="cn.bysjm.domain.system.FeedBack">
+        <id property="Id" column="FEEDBACK_ID"/>
+        <result property="InputBy" column="INPUT_BY"/>
+        <result property="InputTime" column="INPUT_TIME"/>
+        <result property="Title" column="TITLE"/>
+        <result property="Content" column="CONTENT"/>
+        <result property="ClassType" column="CLASS_TYPE"/>
+        <result property="Tel" column="TEL"/>
+        <result property="AnswerBy" column="ANSWER_BY"/>
+        <result property="AnswerUserName" column="Answer_UserName"/>
+        <result property="AnswerTime" column="ANSWER_TIME"/>
+        <result property="SolveMethod" column="SOLVE_METHOD"/>
+        <result property="Resolution" column="RESOLUTION"/>
+        <result property="Difficulty" column="DIFFICULTY"/>
+        <result property="IsShare" column="IS_SHARE "/>
+        <result property="State" column="STATE"/>
+        <result property="CreateBy" column="CREATE_BY"/>
+        <result property="CreateDept" column="CREATE_DEPT"/>
+        <result property="CreateTime" column="CREATE_TIME"/>
+        <result property="CompanyId" column="company_id"/>
+        <result property="CompanyName" column="company_name"/>
+    </resultMap>
+
+    <select id="findAll" parameterType="string" resultMap="BaseResultMap">
+        select * from feedback_c
+    </select>
+
+    <insert id="save" parameterType="FeedBack">
+        insert into feedback_c
+        (FEEDBACK_ID,
+         INPUT_BY,
+         INPUT_TIME,
+         TITLE,
+         CONTENT,
+         CLASS_TYPE,
+         TEL,
+         ANSWER_BY,
+         ANSWER_TIME,
+         SOLVE_METHOD,
+         RESOLUTION,
+         DIFFICULTY,
+         IS_SHARE,
+         STATE,
+         CREATE_BY,
+         CREATE_DEPT,
+         CREATE_TIME,
+         company_id,
+         company_name,
+         ToPeople
+        )
+        values
+        (
+         #{Id},
+         #{InputBy},
+         #{InputTime},
+         #{Title},
+         #{Content},
+         #{ClassType},
+         #{Tel},
+         #{AnswerBy},
+         #{AnswerTime},
+         #{SolveMethod},
+         #{Resolution},
+         #{Difficulty},
+         #{IsShare},
+         #{State},
+         #{CreateBy},
+         #{CreateDept},
+         #{CreateTime},
+         #{CompanyId},
+         #{CompanyName},
+         #{ToPeople}
+        )
+    </insert>
+
+    <select id="findById" parameterType="string" resultMap="BaseResultMap">
+        select * from feedback_c where FEEDBACK_ID=#{Id}
+    </select>
+
+    <update id="update" parameterType="FeedBack">
+        update feedback_c
+        <set>
+            <if test="InputBy!=null and InputBy!=''">
+                INPUT_BY=#{InputBy},
+            </if>
+            <if test="InputTime!=null and InputTime!=''">
+                INPUT_TIME=#{InputTime},
+            </if>
+            <if test="Title!=null and Title!=''">
+                TITLE=#{Title},
+            </if>
+            <if test="Content!=null and Content!=''">
+                CONTENT=#{Content},
+            </if>
+            <if test="ClassType!=null and ClassType!=''">
+                CLASS_TYPE=#{ClassType},
+            </if>
+            <if test="Tel!=null and Tel!=''">
+                TEL=#{Tel},
+            </if>
+            <if test="AnswerBy!=null and AnswerBy!=''">
+                ANSWER_BY=#{AnswerBy},
+            </if>
+            <if test="AnswerUserName!=null and AnswerUserName!=''">
+                Answer_UserName=#{AnswerUserName},
+            </if>
+            <if test="AnswerTime!=null and AnswerTime!=''">
+                ANSWER_TIME=#{AnswerTime},
+            </if>
+            <if test="SolveMethod!=null and SolveMethod!=''">
+                SOLVE_METHOD=#{SolveMethod},
+            </if>
+            <if test="Resolution!=null and Resolution!=''">
+                RESOLUTION=#{Resolution},
+            </if>
+            <if test="Difficulty!=null and Difficulty!=''">
+                DIFFICULTY=#{Difficulty},
+            </if>
+            <if test="IsShare!=null and IsShare!=''">
+                IS_SHARE=#{IsShare},
+            </if>
+            <if test="State!=null and State!=''">
+                STATE=#{State},
+            </if>
+            <if test="CreateBy!=null and CreateBy!=''">
+                CREATE_BY=#{CreateBy},
+            </if>
+            <if test="CreateDept!=null and CreateDept!=''">
+                CREATE_DEPT=#{CreateDept},
+            </if>
+            <if test="CreateTime!=null and CreateTime!=''">
+                CREATE_TIME=#{CreateTime},
+            </if>
+            <if test="CompanyId!=null and CompanyId!=''">
+                company_id=#{CompanyId},
+            </if>
+            <if test="CompanyName!=null and CompanyName!=''">
+                company_name=#{CompanyName},
+            </if>
+            <if test="ToPeople!=null and ToPeople!=''">
+                ToPeople=#{ToPeople},
+            </if>
+        </set>
+        where FEEDBACK_ID=#{Id}
+    </update>
+
+    <select id="findByState" resultType="int">
+        select count(0) from feedback_c where state = '0'
+    </select>
+
+    <select id="findFeedBack" parameterType="user" resultMap="BaseResultMap">
+        select * from feedback_c where ANSWER_BY = #{answerby}
+    </select>
+
+</mapper>
