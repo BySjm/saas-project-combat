@@ -37,4 +37,16 @@ public class StatController extends BaseController {
     public List<Map> onlineCharts() {
         return statService.onlineCharts(getCompanyId());
     }
+
+    @RequestMapping(value = "/priceCharts", name = "跳转到货物市场价统计页面")
+    @ResponseBody
+    public List<Map> priceCharts() {
+        return statService.priceCharts(getCompanyId());
+    }
+
+    @RequestMapping(value = "/ipCharts", name = "跳转到登录ip统计页面")
+    @ResponseBody
+    public List<Map> ipCharts() {
+        return statService.ipCharts(getCompanyId());
+    }
 }

@@ -40,11 +40,11 @@ public class Shipping implements Serializable {
 
     private String specialCondition;
 
-    private String freight;
+    private Double freight;
 
     private String checkBy;
 
-    private Integer state; //0-草稿 1-已上报 2-发票
+    private Integer state;
 
     private String createBy;
 
@@ -55,6 +55,14 @@ public class Shipping implements Serializable {
     private String companyId;
 
     private String companyName;
+
+    private String invoiceNo;
+
+    private String priceCondition;
+
+    private Double tax;
+
+    private String createName;
 
     private static final long serialVersionUID = 1L;
 
@@ -186,12 +194,12 @@ public class Shipping implements Serializable {
         this.specialCondition = specialCondition == null ? null : specialCondition.trim();
     }
 
-    public String getFreight() {
+    public Double getFreight() {
         return freight;
     }
 
-    public void setFreight(String freight) {
-        this.freight = freight == null ? null : freight.trim();
+    public void setFreight(Double freight) {
+        this.freight = freight;
     }
 
     public String getCheckBy() {
@@ -248,5 +256,37 @@ public class Shipping implements Serializable {
 
     public void setCompanyName(String companyName) {
         this.companyName = companyName == null ? null : companyName.trim();
+    }
+
+    public String getInvoiceNo() {
+        return invoiceNo;
+    }
+
+    public void setInvoiceNo(String invoiceNo) {
+        this.invoiceNo = invoiceNo == null ? null : invoiceNo.trim();
+    }
+
+    public String getPriceCondition() {
+        return priceCondition;
+    }
+
+    public void setPriceCondition(String priceCondition) {
+        this.priceCondition = priceCondition == null ? null : priceCondition.trim();
+    }
+
+    public Double getTax() {
+        return tax;
+    }
+
+    public void setTax(Double tax) {
+        this.tax = tax;
+    }
+
+    public String getCreateName() {
+        return createName;
+    }
+
+    public void setCreateName(String createName) {
+        this.createName = createName == null ? null : createName.trim();
     }
 }

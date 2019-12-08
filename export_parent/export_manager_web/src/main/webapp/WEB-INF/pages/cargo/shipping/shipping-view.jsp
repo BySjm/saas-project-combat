@@ -44,7 +44,7 @@
                     <div class="row data-type" style="margin: 0px">
                         <div class="col-md-2 title">货运类型:</div>
                         <div class="col-md-4 data">
-                            <input type="text" class="form-control" placeholder="货运类型" name="orderType" value="${shipping.orderType}">
+                            <input type="text" class="form-control" placeholder="货运类型" name="orderType" value="${shipping.orderType == "sea" ? "船运" : "空运"}">
                         </div>
 
                         <div class="col-md-2 title">托运方:</div>
@@ -110,17 +110,17 @@
                         <div class="col-md-4 data">
                             <select class="form-control" name="isBatch">
                                 <option value="">请选择</option>
-                                <option ${o.isBatch == "0" ?'selected':''} value="0">否</option>
-                                <option ${o.isBatch == "1" ?'selected':''} value="1">是</option>
+                                <option ${shipping.isBatch == "0" ?'selected':''} value="0">否</option>
+                                <option ${shipping.isBatch == "1" ?'selected':''} value="1">是</option>
                             </select>
                         </div>
 
-                        <div class="col-md-2 title">是否交易:</div>
+                        <div class="col-md-2 title">是否转港:</div>
                         <div class="col-md-4 data">
                             <select class="form-control" name="isTrans">
                                 <option value="">请选择</option>
-                                <option ${o.isTrans == "0" ?'selected':''} value="0">否</option>
-                                <option ${o.isTrans == "1" ?'selected':''} value="1">是</option>
+                                <option ${shipping.isTrans == "0" ?'selected':''} value="0">否${o.isTrans}</option>
+                                <option ${shipping.isTrans == "1" ?'selected':''} value="1">是</option>
                             </select>
                         </div>
 
@@ -146,7 +146,7 @@
 
                         <div class="col-md-2 title">状态:</div>
                         <div class="col-md-4 data">
-                            <input type="text" class="form-control" name="state" value="${o.state == 1 ? "已上报" : "草稿"}" />
+                            <input type="text" class="form-control" name="state" value="${shipping.state == 1 ? "已上报" : "草稿"}" />
                             <%--<c:if test="${o.state==0}">草稿</c:if>
                             <c:if test="${o.state==1}"><font color="green">已上报</font></c:if>--%>
                         </div>
@@ -193,3 +193,4 @@
 </script>
 
 </html>
+

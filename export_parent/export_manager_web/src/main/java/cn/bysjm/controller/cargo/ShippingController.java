@@ -5,14 +5,28 @@ import cn.bysjm.domain.cargo.Shipping;
 import cn.bysjm.domain.cargo.ShippingExample;
 import cn.bysjm.service.cargo.PackingService;
 import cn.bysjm.service.cargo.ShippingService;
+import cn.bysjm.utils.DownloadUtil;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.pagehelper.PageInfo;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.apache.commons.lang.StringUtils;
+import org.apache.cxf.jaxrs.provider.DataSourceProvider;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/cargo/shipping")
@@ -23,6 +37,9 @@ public class ShippingController extends BaseController {
 
     @Reference
     private PackingService packingService;
+
+    @Autowired
+    private DownloadUtil downloadUtil;
 
     @RequestMapping(value = "/list", name = "查询本企业所有委托单列表")
     public String findPage(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size) {
@@ -71,6 +88,7 @@ public class ShippingController extends BaseController {
             shipping.setCompanyId(getCompanyId());
             shipping.setCompanyName(getCompanyName());
             shipping.setCreateBy(getUser().getId());
+            shipping.setCreateName(getUser().getUserName());
             shipping.setCreateDept(getUser().getDeptId());
             shipping.setCreateTime(new Date());
             shipping.setState(0); // 设置状态为草稿
@@ -122,6 +140,30 @@ public class ShippingController extends BaseController {
 
         // 重定向 到查询列表
         return "redirect:/cargo/shipping/list.do";
+    }
+
+    @RequestMapping(value = "/shippingPdf", name = "导出委托单")
+    public void shippingPdf(String id) throws Exception {
+        // 查询委托单
+        Shipping shipping = shippingService.findById(id);
+
+        List<Shipping> list = new ArrayList<>();
+        list.add(shipping);
+        // 获取pdf模板 数据流
+        String shippingPdfPath = session.getServletContext().getRealPath("/make/PDFTemplate/export_shipping.jasper");
+        FileInputStream fileInputStream = new FileInputStream(new File(shippingPdfPath));
+        // 数据源
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(list);
+        // 填充模板数据
+        JasperPrint jasperPrint = JasperFillManager.fillReport(fileInputStream, new HashMap<>(), dataSource);
+
+        byte[] bytes = JasperExportManager.exportReportToPdf(jasperPrint);
+
+        ByteArrayOutputStream byteArrayOutPutStream = new ByteArrayOutputStream();
+        // 将pdf字节数组写入到缓存流中
+        byteArrayOutPutStream.write(bytes);
+        downloadUtil.download(byteArrayOutPutStream, response, "委托单.pdf");
+
     }
 
 }

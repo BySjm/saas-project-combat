@@ -10,4 +10,8 @@ public interface StatService {
     List<Map> sellCharts(String companyId);
 
     List<Map> onlineCharts(String companyId);
+
+    List<Map> priceCharts(String companyId);
+
+    List<Map> ipCharts(String companyId);
 }

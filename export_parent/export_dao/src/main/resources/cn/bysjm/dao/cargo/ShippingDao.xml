@@ -18,7 +18,7 @@
     <result column="COPY_NUM" jdbcType="VARCHAR" property="copyNum" />
     <result column="REMARK" jdbcType="VARCHAR" property="remark" />
     <result column="SPECIAL_CONDITION" jdbcType="VARCHAR" property="specialCondition" />
-    <result column="FREIGHT" jdbcType="VARCHAR" property="freight" />
+    <result column="FREIGHT" jdbcType="DOUBLE" property="freight" />
     <result column="CHECK_BY" jdbcType="VARCHAR" property="checkBy" />
     <result column="STATE" jdbcType="INTEGER" property="state" />
     <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy" />
@@ -26,6 +26,10 @@
     <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
     <result column="company_id" jdbcType="VARCHAR" property="companyId" />
     <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="invoice_no" jdbcType="VARCHAR" property="invoiceNo" />
+    <result column="price_condition" jdbcType="VARCHAR" property="priceCondition" />
+    <result column="tax" jdbcType="DOUBLE" property="tax" />
+    <result column="create_name" jdbcType="VARCHAR" property="createName" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -89,7 +93,7 @@
     SHIPPING_ORDER_ID, ORDER_TYPE, SHIPPER, CONSIGNEE, NOTIFY_PARTY, LC_NO, PORT_OF_LOADING, 
     PORT_OF_TRANS, PORT_OF_DISCHARGE, LOADING_DATE, LIMIT_DATE, IS_BATCH, IS_TRANS, COPY_NUM, 
     REMARK, SPECIAL_CONDITION, FREIGHT, CHECK_BY, STATE, CREATE_BY, CREATE_DEPT, CREATE_TIME, 
-    company_id, company_name
+    company_id, company_name, invoice_no, price_condition, tax, create_name
   </sql>
   <select id="selectByExample" parameterType="cn.bysjm.domain.cargo.ShippingExample" resultMap="BaseResultMap">
     select
@@ -129,17 +133,19 @@
       IS_TRANS, COPY_NUM, REMARK, 
       SPECIAL_CONDITION, FREIGHT, CHECK_BY, 
       STATE, CREATE_BY, CREATE_DEPT, 
-      CREATE_TIME, company_id, company_name
-      )
+      CREATE_TIME, company_id, company_name, 
+      invoice_no, price_condition, tax, 
+      create_name)
     values (#{shippingOrderId,jdbcType=VARCHAR}, #{orderType,jdbcType=VARCHAR}, #{shipper,jdbcType=VARCHAR}, 
       #{consignee,jdbcType=VARCHAR}, #{notifyParty,jdbcType=VARCHAR}, #{lcNo,jdbcType=VARCHAR}, 
       #{portOfLoading,jdbcType=VARCHAR}, #{portOfTrans,jdbcType=VARCHAR}, #{portOfDischarge,jdbcType=VARCHAR}, 
       #{loadingDate,jdbcType=TIMESTAMP}, #{limitDate,jdbcType=TIMESTAMP}, #{isBatch,jdbcType=CHAR}, 
       #{isTrans,jdbcType=CHAR}, #{copyNum,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
-      #{specialCondition,jdbcType=VARCHAR}, #{freight,jdbcType=VARCHAR}, #{checkBy,jdbcType=VARCHAR}, 
+      #{specialCondition,jdbcType=VARCHAR}, #{freight,jdbcType=DOUBLE}, #{checkBy,jdbcType=VARCHAR}, 
       #{state,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR}, #{createDept,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{companyId,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}
-      )
+      #{createTime,jdbcType=TIMESTAMP}, #{companyId,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, 
+      #{invoiceNo,jdbcType=VARCHAR}, #{priceCondition,jdbcType=VARCHAR}, #{tax,jdbcType=DOUBLE}, 
+      #{createName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.bysjm.domain.cargo.Shipping">
     insert into co_shipping_order
@@ -216,6 +222,18 @@
       <if test="companyName != null">
         company_name,
       </if>
+      <if test="invoiceNo != null">
+        invoice_no,
+      </if>
+      <if test="priceCondition != null">
+        price_condition,
+      </if>
+      <if test="tax != null">
+        tax,
+      </if>
+      <if test="createName != null">
+        create_name,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="shippingOrderId != null">
@@ -267,7 +285,7 @@
         #{specialCondition,jdbcType=VARCHAR},
       </if>
       <if test="freight != null">
-        #{freight,jdbcType=VARCHAR},
+        #{freight,jdbcType=DOUBLE},
       </if>
       <if test="checkBy != null">
         #{checkBy,jdbcType=VARCHAR},
@@ -289,6 +307,18 @@
       </if>
       <if test="companyName != null">
         #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceNo != null">
+        #{invoiceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="priceCondition != null">
+        #{priceCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="tax != null">
+        #{tax,jdbcType=DOUBLE},
+      </if>
+      <if test="createName != null">
+        #{createName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -350,7 +380,7 @@
         SPECIAL_CONDITION = #{record.specialCondition,jdbcType=VARCHAR},
       </if>
       <if test="record.freight != null">
-        FREIGHT = #{record.freight,jdbcType=VARCHAR},
+        FREIGHT = #{record.freight,jdbcType=DOUBLE},
       </if>
       <if test="record.checkBy != null">
         CHECK_BY = #{record.checkBy,jdbcType=VARCHAR},
@@ -372,6 +402,18 @@
       </if>
       <if test="record.companyName != null">
         company_name = #{record.companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.invoiceNo != null">
+        invoice_no = #{record.invoiceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priceCondition != null">
+        price_condition = #{record.priceCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tax != null">
+        tax = #{record.tax,jdbcType=DOUBLE},
+      </if>
+      <if test="record.createName != null">
+        create_name = #{record.createName,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -396,14 +438,18 @@
       COPY_NUM = #{record.copyNum,jdbcType=VARCHAR},
       REMARK = #{record.remark,jdbcType=VARCHAR},
       SPECIAL_CONDITION = #{record.specialCondition,jdbcType=VARCHAR},
-      FREIGHT = #{record.freight,jdbcType=VARCHAR},
+      FREIGHT = #{record.freight,jdbcType=DOUBLE},
       CHECK_BY = #{record.checkBy,jdbcType=VARCHAR},
       STATE = #{record.state,jdbcType=INTEGER},
       CREATE_BY = #{record.createBy,jdbcType=VARCHAR},
       CREATE_DEPT = #{record.createDept,jdbcType=VARCHAR},
       CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
       company_id = #{record.companyId,jdbcType=VARCHAR},
-      company_name = #{record.companyName,jdbcType=VARCHAR}
+      company_name = #{record.companyName,jdbcType=VARCHAR},
+      invoice_no = #{record.invoiceNo,jdbcType=VARCHAR},
+      price_condition = #{record.priceCondition,jdbcType=VARCHAR},
+      tax = #{record.tax,jdbcType=DOUBLE},
+      create_name = #{record.createName,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -457,7 +503,7 @@
         SPECIAL_CONDITION = #{specialCondition,jdbcType=VARCHAR},
       </if>
       <if test="freight != null">
-        FREIGHT = #{freight,jdbcType=VARCHAR},
+        FREIGHT = #{freight,jdbcType=DOUBLE},
       </if>
       <if test="checkBy != null">
         CHECK_BY = #{checkBy,jdbcType=VARCHAR},
@@ -480,6 +526,18 @@
       <if test="companyName != null">
         company_name = #{companyName,jdbcType=VARCHAR},
       </if>
+      <if test="invoiceNo != null">
+        invoice_no = #{invoiceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="priceCondition != null">
+        price_condition = #{priceCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="tax != null">
+        tax = #{tax,jdbcType=DOUBLE},
+      </if>
+      <if test="createName != null">
+        create_name = #{createName,jdbcType=VARCHAR},
+      </if>
     </set>
     where SHIPPING_ORDER_ID = #{shippingOrderId,jdbcType=VARCHAR}
   </update>
@@ -500,14 +558,18 @@
       COPY_NUM = #{copyNum,jdbcType=VARCHAR},
       REMARK = #{remark,jdbcType=VARCHAR},
       SPECIAL_CONDITION = #{specialCondition,jdbcType=VARCHAR},
-      FREIGHT = #{freight,jdbcType=VARCHAR},
+      FREIGHT = #{freight,jdbcType=DOUBLE},
       CHECK_BY = #{checkBy,jdbcType=VARCHAR},
       STATE = #{state,jdbcType=INTEGER},
       CREATE_BY = #{createBy,jdbcType=VARCHAR},
       CREATE_DEPT = #{createDept,jdbcType=VARCHAR},
       CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
       company_id = #{companyId,jdbcType=VARCHAR},
-      company_name = #{companyName,jdbcType=VARCHAR}
+      company_name = #{companyName,jdbcType=VARCHAR},
+      invoice_no = #{invoiceNo,jdbcType=VARCHAR},
+      price_condition = #{priceCondition,jdbcType=VARCHAR},
+      tax = #{tax,jdbcType=DOUBLE},
+      create_name = #{createName,jdbcType=VARCHAR}
     where SHIPPING_ORDER_ID = #{shippingOrderId,jdbcType=VARCHAR}
   </update>
 </mapper>

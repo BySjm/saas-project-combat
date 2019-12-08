@@ -36,7 +36,7 @@ public class LoginController{
     @Autowired
     private ModuleService moduleService;
 
-	@RequestMapping("/login")
+	@RequestMapping(value = "/login", name = "用户登录")
 	public String login(String email,String password) {
 	    if (StringUtils.isEmpty(email) || StringUtils.isEmpty(password)){
             request.setAttribute("error","用户名或密码不能为空");

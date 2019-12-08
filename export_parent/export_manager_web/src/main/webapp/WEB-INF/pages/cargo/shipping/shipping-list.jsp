@@ -143,7 +143,7 @@
                         <tr>
                             <td><input type="checkbox" name="shippingOrderId" value="${o.shippingOrderId}"/></td>
                             <td>${o.shippingOrderId}</td>
-                            <td>${o.orderType}</td>
+                            <td>${o.orderType == "sea" ? "船运" : "空运"}</td>
                             <td>${o.shipper}</td>
                             <td>${o.consignee}</td>
                             <td>${o.notifyParty}</td>
@@ -162,6 +162,9 @@
                                 <c:if test="${o.state==0}">
                                     <a href="${ctx }/cargo/shipping/toUpdate.do?id=${o.shippingOrderId}">[编辑]</a>
                                     <a href="${ctx }/cargo/shipping/list.do?id=${o.shippingOrderId}">[待定内容]</a>
+                                </c:if>
+                                <c:if test="${o.state==1}">
+                                    <a href="${ctx }/cargo/shipping/shippingPdf.do?id=${o.shippingOrderId}">[下载]</a>
                                 </c:if>
                             </td>
                         </tr>

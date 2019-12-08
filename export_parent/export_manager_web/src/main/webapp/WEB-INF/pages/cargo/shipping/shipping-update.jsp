@@ -88,17 +88,17 @@
                         <div class="col-md-4 data">
                             <select class="form-control" name="isBatch">
                                 <option value="">请选择</option>
-                                <option ${o.isBatch eq "0" ?'selected':''} value="0">否</option>
-                                <option ${o.isBatch eq "1" ?'selected':''} value="1">是</option>
+                                <option ${shipping.isBatch eq "0" ?'selected':''} value="0">否</option>
+                                <option ${shipping.isBatch eq "1" ?'selected':''} value="1">是</option>
                             </select>
                         </div>
 
-                        <div class="col-md-2 title">是否交易:</div>
+                        <div class="col-md-2 title">是否转港:</div>
                         <div class="col-md-4 data">
                             <select class="form-control" name="isTrans">
                                 <option value="">请选择</option>
-                                <option ${o.isTrans == "0" ?'selected':''} value="0">否</option>
-                                <option ${o.isTrans == "1" ?'selected':''} value="1">是</option>
+                                <option ${shipping.isTrans == "0" ?'selected':''} value="0">否</option>
+                                <option ${shipping.isTrans == "1" ?'selected':''} value="1">是</option>
                             </select>
                         </div>
 
