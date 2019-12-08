@@ -59,7 +59,7 @@
     function showRoute() {
         var id = getCheckId()
         if(id) {
-            location.href="${ctx}/map/route/showMap.do?id="+id;
+            location.href="${ctx}/cargo/shipping/showRoute.do?id="+id;
         }else{
             alert("请勾选待处理的记录，且每次只能勾选一个")
         }

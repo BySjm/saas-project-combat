@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+        body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+    </style>
+    <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=Hd3Snf71apiRLcFWZzr5e5shNwCHZU1l"></script>
+    <title>单个标注点沿直线的轨迹运动</title>
+</head>
+<body>
+<div id="allmap"></div>
+</body>
+</html>
+<script type="text/javascript">
+    // 百度地图API功能
+
+    var map = new BMap.Map("allmap");
+    map.disableBizAuthLogo(); //关闭
+    map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+
+    // 创建地址解析器实例
+    var myGeo = new BMap.Geocoder();
+    // 将地址解析结果显示在地图上,并调整地图视野
+    var atgStart;
+      myGeo.getPoint("大连港",function(point){
+        if (point) {
+            map.centerAndZoom(point, 7);
+            map.addOverlay(new BMap.Marker(point));
+            console.log(point + " point");
+            atgStart=point;
+            console.log(atgStart + " 方法内部的");
+        }else{
+            alert("您选择地址没有解析到结果!");
+        }
+    }, "大连市");
+
+    var atgLast;
+    myGeo.getPoint("上海港", function(point){
+        if (point) {
+            // map.centerAndZoom(point, 16);
+            map.addOverlay(new BMap.Marker(point));
+            atgLast=point;
+        }else{
+            alert("您选择地址没有解析到结果!");
+        }
+
+    }, "上海市");
+
+    var atgMiddle;
+    myGeo.getPoint("天津港", function(point){
+        if (point) {
+            // map.centerAndZoom(point, 16);
+            map.addOverlay(new BMap.Marker(point));
+            atgMiddle=point;
+        }else{
+            alert("您选择地址没有解析到结果!");
+        }
+
+    }, "天津市");
+
+
+    var myP1 ;    //起点
+    var myP2 ;    //终点
+    var myP3 ;    //途径点
+    var myIcon;
+
+    window.a = function () {
+        console.log(atgStart + " 赋值后");
+
+        myP1 = new BMap.Point(atgStart.lng, atgStart.lat);    //起点
+        myP2 = new BMap.Point(atgLast.lng, atgLast.lat);    //终点
+        myP3 = new BMap.Point(atgMiddle.lng, atgMiddle.lat);    //途径点
+
+        myIcon = new BMap.Icon("./img/lunc.png", new BMap.Size(46, 70), {    //小车图片
+            //offset: new BMap.Size(0, -5),    //相当于CSS精灵
+            imageOffset: new BMap.Size(0, 0)    //图片的偏移量。为了是图片底部中心对准坐标点。
+        });
+
+        var driving2 = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});    //驾车实例
+        driving2.search(myP1, myP2, {waypoints: [myP3]});    //显示一条公交线路
+    }
+
+    window.run = function (){
+
+        var  pts1=[];
+        var dri1 = new BMap.DrivingRoute(map);
+        dri1.search(myP1,myP3);
+        dri1.setSearchCompleteCallback(function(){
+            pts1 = dri1.getResults().getPlan(0).getRoute(0).getPath();
+        });
+
+        var pts2=[];
+        var dri2 = new BMap.DrivingRoute(map);
+        dri2.search(myP3,myP2);
+        dri2.setSearchCompleteCallback(function(){
+            pts2 = dri2.getResults().getPlan(0).getRoute(0).getPath();
+
+            var pts=pts1.concat(pts2);
+            var paths = pts.length;    //获得有几个点
+            var carMk = new BMap.Marker(pts[0],{icon:myIcon});
+            map.addOverlay(carMk);
+            i=0;
+            function resetMkPoint(i){
+                carMk.setPosition(pts[i]);
+                if(i < paths){
+                    setTimeout(function(){
+                        i++;
+                        resetMkPoint(i);
+                    },2);
+                }
+            }
+            setTimeout(function(){
+                resetMkPoint(5);
+            },2)
+
+        });
+    }
+
+    setTimeout(function(){
+        a();
+    }, 350);
+
+    setTimeout(function(){
+        run();
+    }, 400);
+</script>
+
+
+
+
+
+
+
+<!--
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+        body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=Hd3Snf71apiRLcFWZzr5e5shNwCHZU1l"></script>
+    <title>单个标注点沿直线的轨迹运动</title>
+</head>
+<body>
+<div id="allmap" style="width: 1000px; height: 600px"></div>
+</body>
+</html>
+<script type="text/javascript">
+    // 百度地图API功能
+
+    var map = new BMap.Map("allmap");
+    map.disableBizAuthLogo(); //关闭
+    map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+
+    // 创建地址解析器实例
+    var myGeo = new BMap.Geocoder();
+    // 将地址解析结果显示在地图上,并调整地图视野
+    var atgStart;
+    myGeo.getPoint("大连港", function(point){
+        if (point) {
+            map.centerAndZoom(point, 7);
+            map.addOverlay(new BMap.Marker(point));
+            atgStart=point;
+        }else{
+            alert("您选择地址没有解析到结果!");
+        }
+
+    }, "大连市");
+
+    // var atgLast;
+    var atgLast;
+    myGeo.getPoint("上海港", function(point){
+        if (point) {
+            // map.centerAndZoom(point, 16);
+            map.addOverlay(new BMap.Marker(point));
+            atgLast=point;
+        }else{
+            alert("您选择地址没有解析到结果!");
+        }
+
+    }, "上海市");
+
+    var atgMiddle;
+    myGeo.getPoint("天津港", function(point){
+        if (point) {
+            // map.centerAndZoom(point, 16);
+            map.addOverlay(new BMap.Marker(point));
+            atgMiddle=point;
+        }else{
+            alert("您选择地址没有解析到结果!");
+        }
+
+    }, "天津市");
+
+
+    // var myP1 = new BMap.Point(38.936274, 121.669119);    //起点
+    // var myP2 = new BMap.Point(31.383155, 121.508181);    //终点
+    var myP1 = new BMap.Point(atgStart.lng, atgStart.lat);    //起点
+    var myP2 = new BMap.Point(atgLast.lng, atgLast.lat);    //终点
+    var myP3 = new BMap.Point(atgMiddle.lng, atgMiddle.lat);    //途径点
+    var myIcon = new BMap.Icon("https://developer.baidu.com/map/jsdemo/img/Mario.png", new BMap.Size(32, 70), {    //小车图片
+        //offset: new BMap.Size(0, -5),    //相当于CSS精灵
+        imageOffset: new BMap.Size(0, 0)    //图片的偏移量。为了是图片底部中心对准坐标点。
+    });
+    var driving2 = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});    //驾车实例
+    driving2.search(myP1, myP2, {waypoints: myp3});    //显示一条公交线路
+
+    window.run = function (){
+        var driving = new BMap.DrivingRoute(map);    //驾车实例
+        driving.search(myP1, myP2, {waypoints: myp3});
+        driving.setSearchCompleteCallback(function(){
+            var pts = driving.getResults().getPlan(0).getRoute(0).getPath();    //通过驾车实例，获得一系列点的数组
+            var paths = pts.length;    //获得有几个点
+
+            var carMk = new BMap.Marker(pts[0],{icon:myIcon});
+            map.addOverlay(carMk);
+            i=0;
+            function resetMkPoint(i){
+                carMk.setPosition(pts[i]);
+                if(i < paths){
+                    setTimeout(function(){
+                        i++;
+                        resetMkPoint(i);
+                    },2);
+                }
+            }
+            setTimeout(function(){
+                resetMkPoint(5);
+            },2)
+
+        });
+    }
+
+    setTimeout(function(){
+        run();
+    },150);
+</script>
+
+
+&lt;!&ndash;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+        body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=Hd3Snf71apiRLcFWZzr5e5shNwCHZU1l"></script>
+    <title>单个标注点沿直线的轨迹运动</title>
+</head>
+<body>
+<div id="allmap"></div>
+</body>
+</html>
+<script type="text/javascript">
+    // 百度地图API功能
+    var map = new BMap.Map("allmap");
+    map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+    map.centerAndZoom(new BMap.Point(38.936274, 121.669119), 6);
+
+    var myP1 = new BMap.Point(116.380967,39.913285);    //起点
+    var myP2 = new BMap.Point(116.424374,39.914668);    //终点
+    var myIcon = new BMap.Icon("http://developer.baidu.com/map/jsdemo/img/Mario.png", new BMap.Size(32, 70), {    //小车图片
+        //offset: new BMap.Size(0, -5),    //相当于CSS精灵
+        imageOffset: new BMap.Size(0, 0)    //图片的偏移量。为了是图片底部中心对准坐标点。
+    });
+    var driving2 = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});    //驾车实例
+    driving2.search(myP1, myP2);    //显示一条公交线路
+
+    window.run = function (){
+        var driving = new BMap.DrivingRoute(map);    //驾车实例
+        driving.search(myP1, myP2);
+        driving.setSearchCompleteCallback(function(){
+            var pts = driving.getResults().getPlan(0).getRoute(0).getPath();    //通过驾车实例，获得一系列点的数组
+            var paths = pts.length;    //获得有几个点
+
+            var carMk = new BMap.Marker(pts[0],{icon:myIcon});
+            map.addOverlay(carMk);
+            i=0;
+            function resetMkPoint(i){
+                carMk.setPosition(pts[i]);
+                if(i < paths){
+                    setTimeout(function(){
+                        i++;
+                        resetMkPoint(i);
+                    },100);
+                }
+            }
+            setTimeout(function(){
+                resetMkPoint(5);
+            },100)
+
+        });
+    }
+
+    setTimeout(function(){
+        run();
+    },1500);
+</script>
+&ndash;&gt;
+
+-->

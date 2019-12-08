@@ -166,4 +166,14 @@ public class ShippingController extends BaseController {
 
     }
 
+    @RequestMapping(value = "/showRoute", name = "展示路线")
+    public String showRoute(String id) {
+
+        Shipping shipping = shippingService.findById(id);
+
+        request.setAttribute("shipping", shipping);
+
+        return "/cargo/route/route-show";
+    }
+
 }

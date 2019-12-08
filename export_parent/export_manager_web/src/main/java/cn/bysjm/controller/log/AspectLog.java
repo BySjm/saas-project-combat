@@ -88,7 +88,7 @@ public class AspectLog {
     }
 
     // 保存日志操作
-    public void saveLogPojo(ProceedingJoinPoint pjp) {
+    private void saveLogPojo(ProceedingJoinPoint pjp) {
         SysLog sysLog = new SysLog();
         User user = (User) session.getAttribute("loginUser");
         if (user == null) {
