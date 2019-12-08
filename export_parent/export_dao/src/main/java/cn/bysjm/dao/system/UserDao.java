@@ -29,4 +29,8 @@ public interface UserDao {
     User findByEmail(String email);
 
     List<User> notifyList(String date);
+
+    User findByUnionid(String unionid);
+
+    void updateByEmail(@Param("email") String email,@Param("unionid") String unionid);
 }

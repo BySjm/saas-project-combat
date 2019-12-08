@@ -23,13 +23,15 @@
             <!-- /**代表下面的多级目录也过滤 -->
             <value>
                 /login.jsp = anon
+                /bind-mail.jsp = anon
                 /css/** = anon
                 /img/** = anon
                 /plugins/** = anon
                 /make/** = anon
                 /login.do = anon
-
-                <!--                /system/module/list.do = perms["模块管理"]-->
+                /weixinlogin.do = anon
+                /bindmail.do = anon
+                <!--/system/module/list.do = perms["模块管理"]-->
                 /system/dept/list.do = myPerms["部门管理","删除部门"]
                 /** = authc
             </value>

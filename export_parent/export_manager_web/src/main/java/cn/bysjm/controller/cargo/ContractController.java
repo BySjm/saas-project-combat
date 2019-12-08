@@ -67,6 +67,7 @@ public class ContractController extends BaseController {
 
     @RequestMapping(value = "/toAdd",name = "进入添加合同页面")
     public String toAdd(){
+
         return "cargo/contract/contract-add";
     }
 

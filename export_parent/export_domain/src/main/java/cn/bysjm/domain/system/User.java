@@ -38,4 +38,5 @@ public class User implements Serializable {
     private String updateBy;
     private Date updateTime;
     private String remark;
+    private String unionid;
 }

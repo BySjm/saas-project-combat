@@ -191,4 +191,13 @@
     <select id="notifyList" resultType="user">
         SELECT * FROM pe_user WHERE DATE_FORMAT(birthday, '%m-%d') = #{date}
     </select>
+
+    <select id="findByUnionid" resultMap="BaseResultMap">
+        select * from pe_user WHERE unionid = #{unionid}
+    </select>
+
+    <update id="updateByEmail" parameterType="map">
+        update pe_user set unionid=#{unionid} where email = #{email}
+    </update>
+
 </mapper>

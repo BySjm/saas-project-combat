@@ -29,4 +29,8 @@ public interface UserService {
     void changeRole(String userid, String[] roleIds);
 
     User findByEmail(String email);
+
+    User weixinlogin(String code);
+
+    User bindMail(User user);
 }
