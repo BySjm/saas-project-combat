@@ -62,7 +62,7 @@
 
                     <div class="col-md-2 title">运输方式</div>
                     <div class="col-md-4 data" style="line-height:34px">
-                        ${export.transportMode}
+                        ${export.transportMode == "sea" ? "船运" : "空运"}
                     </div>
 
                     <div class="col-md-2 title">价格条件</div>

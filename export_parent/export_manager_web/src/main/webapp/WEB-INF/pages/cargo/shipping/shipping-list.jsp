@@ -163,7 +163,7 @@
                                     <a href="${ctx }/cargo/shipping/toUpdate.do?id=${o.shippingOrderId}">[编辑]</a>
                                     <a href="${ctx }/cargo/shipping/list.do?id=${o.shippingOrderId}">[待定内容]</a>
                                 </c:if>
-                                <c:if test="${o.state==1}">
+                                <c:if test="${o.state!=0}">
                                     <a href="${ctx }/cargo/shipping/shippingPdf.do?id=${o.shippingOrderId}">[下载]</a>
                                 </c:if>
                             </td>

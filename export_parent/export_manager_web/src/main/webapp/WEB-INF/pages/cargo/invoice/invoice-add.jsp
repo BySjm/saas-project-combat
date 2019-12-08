@@ -104,7 +104,8 @@
                         <c:forEach items="${page.list}" var="o" varStatus="status">
                             <tr>
                                 <td><input type="checkbox" onclick="clickCheck()" name="shippingOrderId" value="${o.shippingOrderId}"/></td>
-                                <td>${o.orderType}</td>
+                                <td>${o.shippingOrderId}</td>
+                                <td>${o.orderType == "sea" ? "船运" : "空运"}</td>
                                 <td>${o.shipper}</td>
                                 <td>${o.consignee}</td>
                                 <td>${o.notifyParty}</td>

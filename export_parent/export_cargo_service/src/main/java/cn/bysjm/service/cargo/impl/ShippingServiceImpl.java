@@ -62,7 +62,7 @@ public class ShippingServiceImpl implements ShippingService {
         // 设置属性 发票号 价格条件 计算税
         shipping.setInvoiceNo(packing.getInvoiceNo());
         shipping.setPriceCondition(export.getPriceCondition());
-        // shipping.setTax(shipping.getFreight() * (1.11));
+        shipping.setTax(shipping.getFreight() * (1.11));
 
 
         shippingDao.insertSelective(shipping);
