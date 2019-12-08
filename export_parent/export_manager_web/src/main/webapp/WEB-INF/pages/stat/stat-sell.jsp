@@ -25,7 +25,7 @@
     </section>
     <section class="content">
         <div class="box box-primary">
-            <div id="main" style="width: 600px;height:400px;"></div>
+            <div id="main" style="width: 600px;height:500px;"></div>
         </div>
     </section>
 </div>
@@ -52,6 +52,18 @@
                 title: {
                     left: 'center',
                     text: '产品销量排行',
+                },
+                tooltip : {
+                    trigger: 'axis',
+                    axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                        type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                    }
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
                 },
                 xAxis: {
                     type: 'category',

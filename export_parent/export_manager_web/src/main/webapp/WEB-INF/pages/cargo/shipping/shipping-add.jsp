@@ -89,18 +89,23 @@
                         <div class="col-md-4 data">
                             <select class="form-control" name="isBatch">
                                 <option value="">请选择</option>
-                                <option ${o.isBatch == "0" ?'selected':''} value="0">否</option>
-                                <option ${o.isBatch == "1" ?'selected':''} value="1">是</option>
+                                <option ${shipping.isBatch == "0" ?'selected':''} value="0">否</option>
+                                <option ${shipping.isBatch == "1" ?'selected':''} value="1">是</option>
                             </select>
                         </div>
 
-                        <div class="col-md-2 title">是否交易:</div>
+                        <div class="col-md-2 title">是否转港:</div>
                         <div class="col-md-4 data">
                             <select class="form-control" name="isTrans">
                                 <option value="">请选择</option>
-                                <option ${o.isTrans == "0" ?'selected':''} value="0">否</option>
-                                <option ${o.isTrans == "1" ?'selected':''} value="1">是</option>
+                                <option ${shipping.isTrans == "0" ?'selected':''} value="0">否</option>
+                                <option ${shipping.isTrans == "1" ?'selected':''} value="1">是</option>
                             </select>
+                        </div>
+
+                        <div class="col-md-2 title">转运港:</div>
+                        <div class="col-md-4 data">
+                            <input type="text" class="form-control" placeholder="转运港" name="portOfTrans" value="${shipping.portOfTrans}">
                         </div>
 
                         <div class="col-md-2 title">提单份数:</div>
@@ -113,10 +118,6 @@
                             <input type="text" class="form-control" placeholder="特殊条款" name="specialCondition" value="${shipping.specialCondition}">
                         </div>
 
-                        <div class="col-md-2 title">转运港:</div>
-                        <div class="col-md-4 data">
-                            <input type="text" class="form-control" placeholder="转运港" name="portOfTrans" value="${shipping.portOfTrans}">
-                        </div>
 
                         <div class="col-md-2 title">运费:</div>
                         <div class="col-md-4 data">

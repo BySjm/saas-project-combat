@@ -132,7 +132,9 @@
                             <td>${o.consignee}</td>
                             <td>${o.shipmentPort}</td>
                             <td>${o.destinationPort}</td>
-                            <td>${o.transportMode}</td>
+                            <td>
+                                ${o.transportMode=='sea'?'海运':'空运'}
+                            </td>
                             <td>${o.priceCondition}</td>
                             <td>
                                 <c:if test="${o.state==0}">草稿</c:if>
@@ -146,7 +148,7 @@
                             <td>
                                 <a href="${ctx }/cargo/export/toView.do?id=${o.id}">[查看]</a>
                                 <a href="${ctx }/cargo/export/toUpdate.do?id=${o.id}">[编辑]</a>
-                                <c:if test="${o.state==2}">
+                                <c:if test="${o.state != 0 && o.state != 1}">
                                     <a href="/cargo/export/exportPdf.do?id=${o.id}">[下载]</a>
                                 </c:if>
                             </td>

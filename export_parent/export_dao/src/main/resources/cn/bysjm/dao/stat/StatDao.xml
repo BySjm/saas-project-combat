@@ -25,4 +25,12 @@
         GROUP BY DATE_FORMAT (TIME, '%H')
         ) AS c ON soi.a1 = c.TIME
     </select>
+
+    <select id="priceCharts" resultType="map">
+        SELECT product_no "name", price "value" FROM co_contract_product where company_id = #{companyId} ORDER BY price DESC limit 10
+    </select>
+
+    <select id="ipCharts" resultType="map">
+        select ip "name", count(0) "value" from st_sys_log where company_id = #{companyId} and method = 'login' group by ip order by count(0) desc limit 10
+    </select>
 </mapper>

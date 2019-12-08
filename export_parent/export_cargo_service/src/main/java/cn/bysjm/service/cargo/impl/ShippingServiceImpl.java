@@ -59,6 +59,11 @@ public class ShippingServiceImpl implements ShippingService {
         shipping.setLcNo(export.getLcno()); // 信用证号
         shipping.setPortOfLoading(export.getShipmentPort()); // 装货港
         shipping.setPortOfDischarge(export.getDestinationPort()); // 卸货港目的港
+        // 设置属性 发票号 价格条件 计算税
+        shipping.setInvoiceNo(packing.getInvoiceNo());
+        shipping.setPriceCondition(export.getPriceCondition());
+        // shipping.setTax(shipping.getFreight() * (1.11));
+
 
         shippingDao.insertSelective(shipping);
     }
@@ -70,6 +75,12 @@ public class ShippingServiceImpl implements ShippingService {
 
     @Override
     public void delete(String shippingOrderId) {
+        Packing packing = packingDao.findById(shippingOrderId);
+        packing.setState(1); // 状态 2 -> 1 已上报
+
+        Export export = exportDao.selectByPrimaryKey(packing.getExportId());
+        export.setState(3); // 状态 4 -> 3 装箱
+
         shippingDao.deleteByPrimaryKey(shippingOrderId);
     }
 
