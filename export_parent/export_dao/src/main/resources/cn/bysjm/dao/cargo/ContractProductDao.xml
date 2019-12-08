@@ -274,5 +274,57 @@
     <delete id="deleteByContractId" parameterType="string">
         delete from co_contract_product where contract_id = #{id}
     </delete>
+    
+     <!--根据公司id查询所有货物-->
+    <select id="findAll" resultMap="BaseResultMap">
+        select * from co_contract_product where company_id=#{companyId} order by order_no asc
+    </select>
+
+
+    <!--保存货物信息-->
+    <insert id="baoCun" parameterType="ContractProduct">
+    insert into co_contract_product(
+    id,
+    factory_id,
+    factory_name,
+    product_no,
+    product_image,
+    product_desc,
+    loading_rate,
+    box_num,
+    packing_unit,
+    cnumber,
+    out_number,
+    finished,
+    product_request,
+    price,
+    amount,
+    order_no,
+    contract_id,
+    company_id,
+    company_name
+    )
+    values(
+    #{id},
+    #{factoryId},
+    #{factoryName},
+    #{productNo},
+    #{productImage},
+    #{productDesc},
+    #{loadingRate},
+    #{boxNum},
+    #{packingUnit},
+    #{cnumber},
+    #{outNumber},
+    #{finished},
+    #{productRequest},
+    #{price},
+    #{amount},
+    #{orderNo},
+    #{contractId},
+    #{companyId},
+    #{companyName}
+    )
+    </insert>
 
 </mapper>

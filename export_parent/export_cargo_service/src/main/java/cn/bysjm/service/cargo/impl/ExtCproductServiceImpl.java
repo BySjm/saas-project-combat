@@ -37,6 +37,13 @@ public class ExtCproductServiceImpl implements ExtCproductService {
     }
 
     @Override
+    public void baoCun(ExtCproduct extCproduct) {
+        extCproductDao.insertSelective(extCproduct);
+    }
+
+
+
+    @Override
     public void update(ExtCproduct extCproduct) {
         //旧钱
         Double amount_old = extCproductDao.selectByPrimaryKey(extCproduct.getId()).getAmount();
@@ -50,6 +57,15 @@ public class ExtCproductServiceImpl implements ExtCproductService {
         contract.setTotalAmount(contract.getTotalAmount() - amount_old + amount_new);
         contractDao.updateByPrimaryKeySelective(contract);
         extCproductDao.updateByPrimaryKeySelective(extCproduct);
+    }
+    @Override
+    public void xiuGai(ExtCproduct extCproduct) {
+        extCproductDao.updateByPrimaryKeySelective(extCproduct);
+    }
+
+    @Override
+    public void shanChu(String id) {
+        extCproductDao.deleteByPrimaryKey(id);
     }
 
     @Override
@@ -75,4 +91,15 @@ public class ExtCproductServiceImpl implements ExtCproductService {
         List<ExtCproduct> extCproducts = extCproductDao.selectByExample(example);
         return new PageInfo(extCproducts);
     }
+
+    @Override
+    public PageInfo findPage(String contractProductId, int page, int size) {
+        PageHelper.startPage(page,size);
+        List<ExtCproduct>extCproducts=extCproductDao.findAll(contractProductId);
+
+
+        return new PageInfo(extCproducts);
+    }
+
+
 }

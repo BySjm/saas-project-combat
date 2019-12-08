@@ -247,4 +247,9 @@
         delete from co_ext_cproduct where contract_id = #{id}
     </delete>
 
+    <!--根据货物id查询所有附件-->
+    <select id="findAll" resultMap="BaseResultMap">
+        select * from co_ext_cproduct where contract_product_id = #{contractProductId} order by order_no asc
+    </select>
+
 </mapper>

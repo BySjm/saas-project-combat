@@ -26,4 +26,7 @@ public interface ExtCproductDao {
 	int updateByPrimaryKeySelective(ExtCproduct record);
 
 	void deleteByContractId(String id);
+
+	List<ExtCproduct> findAll(String contractProductId);
+
 }

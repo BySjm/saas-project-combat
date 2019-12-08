@@ -39,5 +39,6 @@ public interface FactoryService {
 	PageInfo findPage(FactoryExample example, int page, int size);
 	//查询所有
 	public List<Factory> findAll(FactoryExample example);
+	public List<Factory> findByState(String ctype);
 
 }

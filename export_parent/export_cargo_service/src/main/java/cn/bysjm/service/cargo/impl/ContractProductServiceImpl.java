@@ -90,6 +90,11 @@ public class ContractProductServiceImpl implements ContractProductService {
     }
 
     @Override
+    public void shanChu(String id) {
+        productDao.deleteByPrimaryKey(id);
+    }
+
+    @Override
     public ContractProduct findById(String id) {
         return productDao.selectByPrimaryKey(id);
     }
@@ -107,4 +112,25 @@ public class ContractProductServiceImpl implements ContractProductService {
             this.save(contractProduct);
         }
     }
+
+    @Override
+    public PageInfo findPage(String companyId, Integer page, Integer size) {
+        PageHelper.startPage(page,size);
+        List<ContractProduct>list=productDao.findAll(companyId);
+        return new PageInfo(list);
+    }
+
+    @Override
+    public void baoCun(ContractProduct contractProduct) {
+        productDao.baoCun(contractProduct);
+    }
+
+    @Override
+    public void xiuGai(ContractProduct contractProduct) {
+        productDao.updateByPrimaryKeySelective(contractProduct);
+    }
+
+
+
+
 }

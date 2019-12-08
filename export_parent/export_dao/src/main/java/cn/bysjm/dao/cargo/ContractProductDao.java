@@ -23,4 +23,9 @@ public interface ContractProductDao {
     int updateByPrimaryKeySelective(ContractProduct record);
 
     void deleteByContractId(String id);
+
+
+    List<ContractProduct> findAll(String companyId);
+
+    void baoCun(ContractProduct contractProduct);
 }

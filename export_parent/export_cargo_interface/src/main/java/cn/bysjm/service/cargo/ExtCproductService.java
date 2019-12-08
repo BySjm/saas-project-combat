@@ -36,4 +36,12 @@ public interface ExtCproductService {
 	 * 分页查询
 	 */
 	PageInfo findAll(ExtCproductExample example, int page, int size);
+
+	PageInfo findPage(String contractProductId, int page, int size);
+
+    void baoCun(ExtCproduct extCproduct);
+
+    void xiuGai(ExtCproduct extCproduct);
+
+    void shanChu(String id);
 }
