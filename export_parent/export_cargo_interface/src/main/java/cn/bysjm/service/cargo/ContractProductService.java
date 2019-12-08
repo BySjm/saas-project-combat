@@ -39,4 +39,13 @@ public interface ContractProductService {
     PageInfo findAll(ContractProductExample example, int page, int size);
 
     void saveList(List<ContractProduct> list);
+
+
+    PageInfo findPage(String companyId, Integer page, Integer size);
+
+    void baoCun(ContractProduct contractProduct);
+
+    void xiuGai(ContractProduct contractProduct);
+
+    void shanChu(String id);
 }

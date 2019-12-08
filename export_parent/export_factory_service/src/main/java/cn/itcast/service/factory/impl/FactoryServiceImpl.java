@@ -50,7 +50,9 @@ factoryDao.deleteByPrimaryKey(id);
     public List<Factory> findAll(FactoryExample example) {
         return factoryDao.selectByExample(example);
     }
-
+    public List<Factory> findByState(String ctype) {
+        return factoryDao.findByState(ctype);
+    }
 //    @Override
 //    public PageInfo<Factory> findPage(FactoryExample example, Integer page, Integer pageSize) {
 //        PageHelper.startPage(page,pageSize);//使用分页插件

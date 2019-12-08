@@ -41,7 +41,7 @@ public class FactoryController extends BaseController {
 
     @RequestMapping(value = "/toAdd",name = "进入添加生产工厂的页面")
     public String toAdd(){
-        return "/factory/factory-add";
+        return "factory/factory-add";
     }
 
 
@@ -57,6 +57,7 @@ public class FactoryController extends BaseController {
              //2.设置基本属性
              factory.setState(1);
              factory.setCreateTime(new Date());//创建时间
+             factory.setUpdateTime(new Date());
              factoryService.save(factory);
          }else {
 
@@ -70,7 +71,7 @@ public class FactoryController extends BaseController {
     public String toUpdate(String id){
         Factory factory=factoryService.findById(id);
         request.setAttribute("factory",factory);
-        return "/factory/factory-update";
+        return "factory/factory-update";
     }
 
     @RequestMapping(value = "/delete",name = "删除生产工厂的信息")
