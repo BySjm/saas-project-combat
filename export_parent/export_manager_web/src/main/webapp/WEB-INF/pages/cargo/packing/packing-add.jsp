@@ -134,7 +134,7 @@
                                     <td>${o.consignee}</td>
                                     <td>${o.shipmentPort}</td>
                                     <td>${o.destinationPort}</td>
-                                    <td>${o.transportMode}</td>
+                                    <td>${o.transportMode=='sea'?'海运':'空运'}</td>
                                     <td>${o.priceCondition}</td>
                                 </tr>
                             </c:forEach>

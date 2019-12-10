@@ -69,6 +69,10 @@ public class LoginController {
             return "forward:/login.jsp";
         }
         user = userService.bindMail(user);
+        if(user == null){
+            request.setAttribute("error", "你不是本公司员工");
+            return "forward:/bind-mail.jsp";
+        }
         return method(user.getEmail(),user.getPassword());
     }
 

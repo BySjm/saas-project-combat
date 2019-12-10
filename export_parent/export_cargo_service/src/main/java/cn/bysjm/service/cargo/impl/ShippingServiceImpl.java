@@ -77,10 +77,10 @@ public class ShippingServiceImpl implements ShippingService {
     public void delete(String shippingOrderId) {
         Packing packing = packingDao.findById(shippingOrderId);
         packing.setState(1); // 状态 2 -> 1 已上报
-
+        packingDao.update(packing);
         Export export = exportDao.selectByPrimaryKey(packing.getExportId());
         export.setState(3); // 状态 4 -> 3 装箱
-
+        exportDao.updateByPrimaryKeySelective(export);
         shippingDao.deleteByPrimaryKey(shippingOrderId);
     }
 

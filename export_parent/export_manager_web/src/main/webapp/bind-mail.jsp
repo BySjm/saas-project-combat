@@ -32,6 +32,11 @@
                 <input type="password" name="password" class="form-control" placeholder="密码">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
+            <div class="col-xs-8">
+                <div class="checkbox icheck">
+                    <label style="color: red">${error}</label>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-xs-4">
                     <button type="submit" class="btn btn-primary btn-block btn-flat">绑定</button>

@@ -129,9 +129,11 @@ public class UserServiceImpl implements UserService {
     public User bindMail(User user) {//这个user有邮箱，密码，unionid
         String password = new Md5Hash(user.getPassword(), user.getEmail(), 2).toString();//加密后的密码
         User userFromDB = userDao.findByEmail(user.getEmail());
-        if (password.equals(userFromDB.getPassword())){
-            userDao.updateByEmail(userFromDB.getEmail(),user.getUnionid());
-            return userFromDB;
+        if (userFromDB != null){
+            if (password.equals(userFromDB.getPassword())){
+                userDao.updateByEmail(userFromDB.getEmail(),user.getUnionid());
+                return userFromDB;
+            }
         }
         return null;
     }
